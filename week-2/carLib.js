@@ -1,3 +1,12 @@
+/*
+// Data model:
+{
+    "model": "Corolla",
+    "color": "Red",
+    "age": 3
+}
+*/
+
 let carArray = [];
 let nextId = 1;
 
