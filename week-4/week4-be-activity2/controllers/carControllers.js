@@ -1,4 +1,4 @@
-const Car = require('../models/carModel');
+const Car = require("../models/carModel");
 const mongoose = require("mongoose");
 
 // GET /cars
@@ -10,14 +10,16 @@ const getAllCars = async (req, res) => {
     res.status(500).json({ message: "Failed to retrieve cars" });
   }
 };
- 
+
 // POST /cars
 const createCar = async (req, res) => {
   try {
     const newCar = await Car.create({ ...req.body });
     res.status(201).json(newCar);
   } catch (error) {
-    res.status(400).json({ message: "Failed to create car", error: error.message });
+    res
+      .status(400)
+      .json({ message: "Failed to create car", error: error.message });
   }
 };
 
@@ -53,7 +55,7 @@ const updateCar = async (req, res) => {
     const updatedCar = await Car.findOneAndUpdate(
       { _id: carId },
       { ...req.body },
-      { new: true }
+      { new: true },
     );
     if (updatedCar) {
       res.status(200).json(updatedCar);
