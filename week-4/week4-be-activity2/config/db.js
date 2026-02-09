@@ -19,4 +19,3 @@ module.exports = connectDB;
 // Impovements:
 // Changed hard coded connection string
 // Duplicate Connection Prevention
-
