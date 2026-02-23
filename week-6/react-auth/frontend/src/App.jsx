@@ -3,12 +3,14 @@ import { useState } from "react";
 import SignupComponent from "./pages/SignupComponent";
 import LoginComponent from "./pages/LoginComponent";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    JSON.parse(localStorage.getItem("user")) || false
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    return user && user.token ? true : false;
+  });
   return (
     <>
       <BrowserRouter>
@@ -20,7 +22,11 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={isAuthenticated ? <Home /> : <Navigate to="/signup" />}
+              element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/profile"
+              element={isAuthenticated ? <Profile /> : <Navigate to="/login" />}
             />
             <Route
               path="/login"

@@ -7,11 +7,14 @@ function Navbar({ setIsAuthenticated, isAuthenticated }) {
     setIsAuthenticated(false);
   };
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <nav>
       {isAuthenticated && (
         <div>
-          <span>Welcome</span>
+          <span>Welcome, {user?.email}</span>
+          <Link to="/">Home</Link>
           <button onClick={handleClick}>Log out</button>
         </div>
       )}
