@@ -8,7 +8,22 @@ const LoginComponent = ({ setIsAuthenticated }) => {
 
   const handleLogin = async () => {
     try {
-		// endpoint: POST /api/user/login
+      // endpoint: POST /api/user/login
+      const response = await fetch("api/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const user = await response.json();
+
+        localStorage.setItem("user", JSON.stringify(user));
+        setIsAuthenticated(true);
+        navigate("/");
+      } else {
+        console.error("Signin failed");
+      }
     } catch (error) {
       console.error("Error during login:", error);
     }
@@ -35,7 +50,9 @@ const LoginComponent = ({ setIsAuthenticated }) => {
           placeholder="Enter your password"
         />
       </label>
-      <button className="login-button" onClick={handleLogin}>Log In</button>
+      <button className="login-button" onClick={handleLogin}>
+        Log In
+      </button>
     </div>
   );
 };
